@@ -14,8 +14,8 @@ const SearchArea = () => {
     return (
         <Box>
             <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center', marginTop:'-40px' }}>
-                <Paper sx={{ display: 'flex', alignItems: 'center', width: '100%', border:'none' }}>
-                    <List component="div" sx={{ display: 'flex', alignItems: 'center', padding: '10px', flexGrow: 1 }} >
+                <Paper sx={{ display: 'flex', alignItems: 'center', width: '100%', border:'none', boxShadow:'none' }}>
+                    <List component="div" sx={{ display: 'flex', alignItems: 'center', padding: '15px 10px',  flexGrow: 1 }} >
                         <img src={require('../images/search-icon.svg').default} />
                         <TextField
                             margin="dense"
@@ -32,7 +32,7 @@ const SearchArea = () => {
                     </List>
                     <Divider orientation="vertical" flexItem />
 
-                    <List component="div" sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', flexGrow: 1 }}>
+                    <List component="div" sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', flexGrow: 1, padding: '15px 10px'}}>
                         <img src={require('../images/location-icon.svg').default} />
                         <TextField
                             margin="dense"
@@ -48,7 +48,7 @@ const SearchArea = () => {
 
                     </List>
                     <Divider orientation="vertical" flexItem />
-                    <List component="div" sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', padding: '10px' }}>
+                    <List component="div" sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px',padding: '15px 10px' }}>
                         <Checkbox variant="soft" sx={{mr:'10px'}} />
 
 
