@@ -2,6 +2,7 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Container, Grid } from '@mui/material';
+import { Link } from "react-router-dom";
 
 
 
@@ -26,7 +27,8 @@ export default function MediaCard() {
           return (
 
             <Grid key={idx} item md={4} xs={6}>
-              <Card sx={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'visible', height: '100%' }}>
+              <Link to={job.job_id} style={{ textDecoration: 'none' }}>
+                <Card sx={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'visible', height: '100%', boxShadow:'none' }}>
 
                 <img src={job.thumbnail}
                   style={{
@@ -62,6 +64,7 @@ export default function MediaCard() {
                     {job.location}</h3>
                 </div>
               </Card>
+              </Link>
             </Grid>
           )
         })}
