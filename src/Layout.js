@@ -58,7 +58,8 @@ const Layout = (props) => {
              </Container>
                 </Box>
                 
-          </AppBar>
+            </AppBar>
+            
            {props.children}
         </>
       );
