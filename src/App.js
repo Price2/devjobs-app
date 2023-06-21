@@ -15,8 +15,21 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout><SearchArea /><MediaCard /></Layout>}></Route>
-          <Route exact path="/:id" element={<Layout><CompanyHeader/><CompanyCard/><CompanyFooter/></Layout>}></Route>
+          <Route path="/" element={
+            <Layout>
+              <SearchArea />
+              <MediaCard />
+            </Layout>}>
+
+          </Route>
+          <Route exact path="/:id" element={
+            <Layout>
+              <CompanyHeader />
+              <CompanyCard />
+              <CompanyFooter />
+            </Layout>}>
+
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

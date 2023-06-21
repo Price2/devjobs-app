@@ -27,7 +27,7 @@ export default function MediaCard() {
           return (
 
             <Grid key={idx} item md={4} xs={6}>
-              <Link to={job.job_id} style={{ textDecoration: 'none' }}>
+              <Link to={job.job_id.slice(0,15)} state={{job}} style={{ textDecoration: 'none' }}>
                 <Card sx={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'visible', height: '100%', boxShadow:'none' }}>
 
                 <img src={job.thumbnail}
