@@ -65,69 +65,70 @@ const IOSSwitch = styled((props) => (
 const Layout = (props) => {
   const theme = useTheme();
   const toggler = React.useContext(ThemeContext)
-  
+
   console.log("context value? ", toggler)
   return (
     <>
-      <AppBar sx={{ borderRadius: '0px 0px 0px 100px', backgroundColor: '#5964E0' }} position="static" className="test">
-        <Box>
-          <Container sx={{ display: 'flex', justifyContent: 'center', padding: '30px', paddingBottom: '80px' }}>
-            <Typography
-              variant="h2"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { md: 'flex' },
-                fontFamily: 'monospace',
-                fontSize: '24px',
-                fontWeight: 700,
-                lineHeight: '29px',
-                //   letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-                flexGrow: 1
-              }}
-            >
-              devjobs
-            </Typography>
+      <AppBar sx={{backgroundColor: '#5964E0' }} position="static" className="test">
 
-            <Typography
-              variant="h2"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontSize: '24px',
-                fontWeight: 700,
-                lineHeight: '29px',
-                //   letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-                display: { xs: 'none', md: 'flex' },
-                alignSelf: 'flex-end'
-              }}
-            >
 
-            </Typography>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <Stack direction="row" spacing={1} alignItems="center">
-                <img src={require("../images/light_icon.svg").default} alt="" />
-                <FormControlLabel
-                  control={<IOSSwitch sx={{ m: 1 }} onChange={ toggler.toggleTheme } />}
-                />
-                <img src={require("../images/dark_icon.svg").default} alt="" />
-              </Stack>
-            </div>
-          </Container>
-        </Box>
+          <Box>
+            <Container sx={{ display: 'flex', justifyContent: 'center', padding: '30px', paddingBottom: '80px' }}>
+              <Typography
+                variant="h2"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  display: { md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontSize: '24px',
+                  fontWeight: 700,
+                  lineHeight: '29px',
+                  //   letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  flexGrow: 1
+                }}
+              >
+                devjobs
+              </Typography>
+
+              <Typography
+                variant="h2"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontSize: '24px',
+                  fontWeight: 700,
+                  lineHeight: '29px',
+                  //   letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  display: { xs: 'none', md: 'flex' },
+                  alignSelf: 'flex-end'
+                }}
+              >
+
+              </Typography>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <img src={require("../images/light_icon.svg").default} alt="" />
+                  <FormControlLabel
+                    control={<IOSSwitch sx={{ m: 1 }} onChange={toggler.toggleTheme} />}
+                  />
+                  <img src={require("../images/dark_icon.svg").default} alt="" />
+                </Stack>
+              </div>
+            </Container>
+          </Box>
 
       </AppBar>
-
       {props.children}
 
     </>

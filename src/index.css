@@ -5,8 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-background-color: #F4F6F8;
-overflow-x: hidden;
+  background-color: #F4F6F8;
+  overflow-x: hidden;
 }
 
 code {
@@ -15,8 +15,18 @@ code {
 }
 
 
-.test{
-  background: url('images/nav.svg')  no-repeat;
+.test {
+  background: url('images/nav.svg') no-repeat;
   background-size: cover;
+  border-radius: 0px 0px 0px 100px;
 
+}
+
+
+@media screen and (max-width: 600px) {
+  .test {
+    background: url('images/small_nav.svg') no-repeat;
+    background-size: cover;
+    border-radius: 0px;
+  }
 }

@@ -7,36 +7,80 @@ import { ThemeContext } from './ThemeToggler';
 
 
 
-export default function MediaCard() {
+export default function MediaCard({ searchCriteria }) {
   const [allCards, setAllCards] = React.useState([])
   const [nextPage, setNextPage] = React.useState(0)
+  const [searchCrit, setSearchCrit] = React.useState({})
   const toggler = React.useContext(ThemeContext)
   const mode = toggler.theme
 
 
+  React.useEffect(() => {
+    if (Object.keys(searchCriteria).length) {
+      setSearchCrit(searchCriteria)
+    }
+  }, [searchCriteria]);
+
+
+  React.useEffect(() => {
+    if (Object.keys(searchCrit).length) {
+      fetchBySearchCriteria()
+    }
+
+  }, [searchCrit]);
 
 
   React.useEffect(() => {
     const fetchJobs = fetch('https://serpapi.com/search.json?engine=google_jobs&q=dev+jobs&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b').then((data) => data.json()).then((json) => setAllCards(json.jobs_results))
-    console.log('jobs fetched: ', fetchJobs)
 
   }, []);
 
 
-
-
   React.useEffect(() => {
     if (nextPage > 0) {
-      const fetchJobs = fetch('https://serpapi.com/search.json?engine=google_jobs&q=dev+jobs&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&start=' + nextPage).then((data) => data.json()).then((json) =>
-        setAllCards((prevCards) => [...prevCards, ...json.jobs_results]))
-      console.log("Fetched more cards ", fetchJobs)
+      handleNextPage()
     }
 
   }, [nextPage]);
 
   const handleLoadMore = () => {
-    setNextPage((prevState)=> prevState+1)
+    setNextPage((prevState) => prevState + 1)
   }
+
+
+  const handleNextPage = () => {
+    if (searchCrit.search) {
+      fetch("https://serpapi.com/search.json?api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&engine=google_jobs&q=" + searchCrit.search + "&hl=en&start="+nextPage).then((data) => data.json()).then((json) =>
+      setAllCards((prevCards) => [...prevCards, ...json.jobs_results]))
+    }
+    else if (searchCrit.location) {
+      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCriteria.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&location=' + searchCrit.location +"start="+nextPage).then((data) => data.json()).then((json) =>
+      setAllCards((prevCards) => [...prevCards, ...json.jobs_results]))
+    }
+    else {
+      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCriteria.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&chips=employment_type=fulltime&start='+nextPage).then((data) => data.json()).then((json) =>setAllCards((prevCards) => [...prevCards, ...json.jobs_results]))
+    }
+
+  }
+  const fetchBySearchCriteria = () => {
+
+    debugger;
+    if (searchCrit.search) {
+      fetch("https://serpapi.com/search.json?api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&engine=google_jobs&q=" + searchCrit.search + "&hl=en").then((data) => data.json()).then((json) =>
+        setAllCards(json.jobs_results))
+
+    }
+    else if (searchCrit.location) {
+      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCriteria.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&location=' + searchCrit.location).then((data) => data.json()).then((json) =>
+        setAllCards(json.jobs_results))
+    }
+    else {
+      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCriteria.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&chips=employment_type=fulltime').then((data) => data.json()).then((json) =>
+        setAllCards(json.jobs_results))
+    }
+
+  }
+
 
   console.log('Cards: ', allCards)
   console.log("All cards ", allCards)
@@ -48,11 +92,11 @@ export default function MediaCard() {
           {allCards.map((job, idx) => {
             return (
 
-              <Grid key={idx} item md={4} xs={6}>
+              <Grid key={idx} item md={4} sm={6} xs={12}>
                 <Link to={job.job_id.slice(0, 15)} state={{ job }} style={{ textDecoration: 'none' }}>
                   <Card sx={{
-                    display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'visible', height: '100%', boxShadow: 'none', minWidth: 275,
-                    backgroundColor: mode === "light-mode"? "#ffffff" : "#19202D"
+                    display: "flex", flexDirection: 'column', position: 'relative', overflow: 'visible', height: '100%', boxShadow: 'none', minWidth: 275,
+                    backgroundColor: mode === "light-mode" ? "#ffffff" : "#19202D"
                   }}>
 
                     <img src={job.thumbnail}
@@ -73,7 +117,7 @@ export default function MediaCard() {
                         fontWeight: '700',
                         fontSize: '20px',
                         lineHeight: '25px',
-                        color: mode === "light-mode"? "#19202D" : "#ffffff",
+                        color: mode === "light-mode" ? "#19202D" : "#ffffff",
                         marginTop: '0px'
                       }}>{job.title}</p>
                       <p style={{ fontSize: '16px', lineHeight: '20px', fontWeight: '400', color: '#6E8098' }}>{job.company_name}</p>
@@ -109,13 +153,13 @@ export default function MediaCard() {
           textTransform: 'none',
           ":hover": {
             bgcolor: ' #939BF4',
-        }
+          }
         }}><span style={{
           fontWeight: '700',
           fontSize: '16px',
           lineHeight: '20px',
-            textAlign: 'center',
-          
+          textAlign: 'center',
+
         }}>Load More</span></Button>
       </Container>
     </>
