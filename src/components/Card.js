@@ -64,7 +64,6 @@ export default function MediaCard({ searchCriteria }) {
   }
   const fetchBySearchCriteria = () => {
 
-    debugger;
     if (searchCrit.search) {
       fetch("https://serpapi.com/search.json?api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&engine=google_jobs&q=" + searchCrit.search + "&hl=en").then((data) => data.json()).then((json) =>
         setAllCards(json.jobs_results))
@@ -81,9 +80,6 @@ export default function MediaCard({ searchCriteria }) {
 
   }
 
-
-  console.log('Cards: ', allCards)
-  console.log("All cards ", allCards)
   return (
     <>
       <Container>

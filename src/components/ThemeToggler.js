@@ -9,7 +9,6 @@ const ThemeProvider = (props) => {
 
     const [theme, setTheme] = useState('light-mode');
     const toggleTheme = () => {
-        console.log("AM I TOGGLED? ")
         setTheme((prevTheme) => (prevTheme === 'light-mode' ? 'dark-mode' : 'light-mode'));
    
         document.body.style = theme === "light-mode" ? "background: #121721" : "background: #F4F6F8";

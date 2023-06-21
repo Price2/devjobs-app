@@ -65,8 +65,6 @@ const IOSSwitch = styled((props) => (
 const Layout = (props) => {
   const theme = useTheme();
   const toggler = React.useContext(ThemeContext)
-
-  console.log("context value? ", toggler)
   return (
     <>
       <AppBar sx={{backgroundColor: '#5964E0' }} position="static" className="test">

@@ -18,7 +18,6 @@ const SearchArea = ({ filters }) => {
     const handleInput = () => {
         filters(input)
     }
-    console.log("input ", input)
     return (
         <Box>
             <Container maxWidth="lg" sx={{ display: { sm:'flex', xs:"none"}, justifyContent: 'center', marginTop: '-40px' }}>
@@ -107,15 +106,6 @@ const SearchArea = ({ filters }) => {
                     </List>
                 </Paper>
             </Container>
-
-            
-
-
-
-
-
-
-
 
 
             <Container maxWidth="lg" sx={{ display: {lg:"none", md:"none", sm:"none", xs:'flex'} , justifyContent: 'center', marginTop: '-40px' }}>

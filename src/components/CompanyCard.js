@@ -16,17 +16,12 @@ const CompanyCard = () => {
 
 
     React.useEffect(() => {
-        console.log("params? ", location.state.job)
         if (!currentSelectedCard.length) {
             setCurrentSelectedCard([location.state.job])
         }
     }, [location.state]);
 
 
-
-
-    console.log("card state  ? ", currentSelectedCard)
-    debugger;
     return (
 
 

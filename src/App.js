@@ -16,7 +16,6 @@ function App() {
 
   const queryInput = (filter) => {
     setInput(filter)
-    console.log('im here in app ', filter)
   }
   return (
     <>
