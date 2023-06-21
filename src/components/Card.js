@@ -3,12 +3,17 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Button, Container, Grid } from '@mui/material';
 import { Link } from "react-router-dom";
+import { ThemeContext } from './ThemeToggler';
 
 
 
 export default function MediaCard() {
   const [allCards, setAllCards] = React.useState([])
   const [nextPage, setNextPage] = React.useState(0)
+  const toggler = React.useContext(ThemeContext)
+  const mode = toggler.theme
+
+
 
 
   React.useEffect(() => {
@@ -45,7 +50,10 @@ export default function MediaCard() {
 
               <Grid key={idx} item md={4} xs={6}>
                 <Link to={job.job_id.slice(0, 15)} state={{ job }} style={{ textDecoration: 'none' }}>
-                  <Card sx={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'visible', height: '100%', boxShadow: 'none' }}>
+                  <Card sx={{
+                    display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'visible', height: '100%', boxShadow: 'none', minWidth: 275,
+                    backgroundColor: mode === "light-mode"? "#ffffff" : "#19202D"
+                  }}>
 
                     <img src={job.thumbnail}
                       style={{
@@ -65,7 +73,7 @@ export default function MediaCard() {
                         fontWeight: '700',
                         fontSize: '20px',
                         lineHeight: '25px',
-                        color: '#19202D',
+                        color: mode === "light-mode"? "#19202D" : "#ffffff",
                         marginTop: '0px'
                       }}>{job.title}</p>
                       <p style={{ fontSize: '16px', lineHeight: '20px', fontWeight: '400', color: '#6E8098' }}>{job.company_name}</p>
@@ -97,14 +105,17 @@ export default function MediaCard() {
         <Button onClick={handleLoadMore} variant="contained" sx={{
           borderRadius: '5px',
           background: '#5964E0',
-
           padding: '10px 35px',
           textTransform: 'none',
+          ":hover": {
+            bgcolor: ' #939BF4',
+        }
         }}><span style={{
           fontWeight: '700',
           fontSize: '16px',
           lineHeight: '20px',
-          textAlign: 'center',
+            textAlign: 'center',
+          
         }}>Load More</span></Button>
       </Container>
     </>

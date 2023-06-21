@@ -4,13 +4,17 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { AppBar, Button, Container } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import { ThemeContext } from './ThemeToggler';
+
+
+
+
 const CompanyFooter = () => {
 
-
     const [currentSelectedCard, setCurrentSelectedCard] = React.useState([])
-
     const location = useLocation();
-
+    const toggler = React.useContext(ThemeContext)
+    const mode = toggler.theme
 
     React.useEffect(() => {
         console.log("card header? ", location.state.job)
@@ -31,7 +35,8 @@ const CompanyFooter = () => {
                                 bottom: '0',
                                 width: '100%',
                                 display: 'flex',
-                                padding: '10px'
+                                padding: '10px',
+                                backgroundColor: mode === "light-mode"? "#ffffff" : "#19202D"
                             }} component="footer" square variant="outlined">
                                 <Container>
                                     <Grid container sx={{ flexGrow: 1, justifyContent: 'center' }} direction="row" spacing={2}>
@@ -45,6 +50,7 @@ const CompanyFooter = () => {
                                                         fontSize: '28px',
                                                         lineHeight: '35px',
                                                         margin: '0px',
+                                                        color: mode === "light-mode"? "#19202D" : "#ffffff"
                                                     }}>{cardDetails.title }</h4>
                                                     <p style={{
                                                         fontWeight: '400',
@@ -64,6 +70,9 @@ const CompanyFooter = () => {
                                                         padding: '15px 20px',
                                                         ml: '15px',
                                                         textTransform: 'none',
+                                                        ":hover": {
+                                                            bgcolor: ' #939BF4',
+                                                        }
                                                     }}><span style={{
                                                         fontWeight: '700',
                                                         fontSize: '16px',

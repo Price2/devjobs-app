@@ -5,17 +5,19 @@ import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { Button, Container, Divider, List, TextField, Typography } from '@mui/material';
 import Checkbox from '@mui/joy/Checkbox';
+import { ThemeContext } from './ThemeToggler';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
-
 const SearchArea = () => {
+    const toggler = React.useContext(ThemeContext)
+    const mode = toggler.theme
     return (
         <Box>
-            <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center', marginTop:'-40px' }}>
-                <Paper sx={{ display: 'flex', alignItems: 'center', width: '100%', border:'none', boxShadow:'none' }}>
-                    <List component="div" sx={{ display: 'flex', alignItems: 'center', padding: '15px 10px',  flexGrow: 1 }} >
+            <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center', marginTop: '-40px' }}>
+                <Paper sx={{ display: 'flex', alignItems: 'center', width: '100%', border: 'none', boxShadow: 'none', backgroundColor: mode == 'light-mode' ? '#ffffff' : '#19202D' }}>
+                    <List component="div" sx={{ display: 'flex', alignItems: 'center', padding: '15px 10px', flexGrow: 1 }} >
                         <img src={require('../images/search-icon.svg').default} />
                         <TextField
                             margin="dense"
@@ -27,12 +29,18 @@ const SearchArea = () => {
                                 disableUnderline: true,
                             }}
                             fullWidth
-                            sx={{ ml: '10px' }}
+                            sx={{
+                                ml: '10px',
+                                input: {
+                                    color:  mode == 'light-mode' ?' #19202D ': '#ffffff',
+                                   
+                                },
+                            }}
                         />
                     </List>
-                    <Divider orientation="vertical" flexItem />
+                    <Divider orientation="vertical" flexItem sx={{color:'#6E8098', borderWidth:'1px', opacity: '0.2',  borderColor: "#6E8098"}} />
 
-                    <List component="div" sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', flexGrow: 1, padding: '15px 10px'}}>
+                    <List component="div" sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', flexGrow: 1, padding: '15px 10px' }}>
                         <img src={require('../images/location-icon.svg').default} />
                         <TextField
                             margin="dense"
@@ -43,13 +51,18 @@ const SearchArea = () => {
                             InputProps={{
                                 disableUnderline: true, // <== added this
                             }}
-                            sx={{ ml: '10px' }}
+                            sx={{
+                                ml: '10px',
+                                input: {
+                                    color:  mode == 'light-mode' ?' #19202D ': '#ffffff',
+                                   
+                                },    }}
                         />
 
                     </List>
-                    <Divider orientation="vertical" flexItem />
-                    <List component="div" sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px',padding: '15px 10px' }}>
-                        <Checkbox variant="soft" sx={{mr:'10px'}} />
+                    <Divider orientation="vertical" flexItem sx={{color: '#6E8098', borderWidth:'1px', opacity: '0.2', borderColor: "#6E8098"}} />
+                    <List component="div" sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', padding: '15px 10px' }}>
+                        <Checkbox variant="soft" sx={{ mr: '10px' }} />
 
 
 
@@ -60,7 +73,7 @@ const SearchArea = () => {
                                 fontWeight: '700',
                                 fontSize: '16px',
                                 lineHeight: '20px',
-
+                                color:  mode == 'light-mode' ?' #19202D ': '#ffffff',
                             }}>
                             Full Time Only
                         </Typography>
@@ -73,7 +86,10 @@ const SearchArea = () => {
                             textAlign: 'center',
                             padding: '15px 40px',
                             ml: '15px',
-                            textTransform: 'none'
+                            textTransform: 'none',
+                            ":hover": {
+                                bgcolor: ' #939BF4',
+                            }
                         }}>Search</Button>
 
 

@@ -4,14 +4,15 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { Button, Container, List } from '@mui/material';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { ThemeContext } from './ThemeToggler';
 
 
 const CompanyHeader = () => {
 
     const [currentSelectedCard, setCurrentSelectedCard] = React.useState([])
-
     const location = useLocation();
-
+    const toggler = React.useContext(ThemeContext)
+    const mode = toggler.theme
 
     React.useEffect(() => {
         console.log("card header? ", location.state.job)
@@ -32,7 +33,7 @@ const CompanyHeader = () => {
                             <Grid key={ idx} container sx={{ flexGrow: 1, justifyContent: 'center' }} direction="row" spacing={2}>
 
                                 <Grid item md={10}>
-                                    <Paper sx={{ display: 'flex', alignItems: 'center', width: '100%', border: 'none', boxShadow: 'none' }}>
+                                    <Paper sx={{ display: 'flex', alignItems: 'center', width: '100%', border: 'none', boxShadow: 'none', backgroundColor: mode === "light-mode"? "#ffffff" : "#19202D" }}>
                                         <List component="div" sx={{ display: 'flex', alignItems: 'flex', padding: '0' }} >
                                             <img src={cardDetails.thumbnail? cardDetails.thumbnail: require('../images/company_pic.svg').default} />
                                         </List>
@@ -43,7 +44,7 @@ const CompanyHeader = () => {
                                                 fontWeight: '700',
                                                 fontSize: '24px',
                                                 lineHeight: '30px',
-                                                color: '#19202D',
+                                                color:  mode === "light-mode"? "#19202D" : "#ffffff",
                                                 marginTop: '0',
                                                 marginLeft: '50px'
                                             }}>{cardDetails.company_name? cardDetails.company_name: "Scoot"}</h3>
@@ -61,16 +62,19 @@ const CompanyHeader = () => {
                                         <List component="div" sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', padding: '15px 43px' }}>
                                             <Button variant="contained" sx={{
                                                 borderRadius: '5px',
-                                                background: '#eff0fc',
+                                                background: mode === "light-mode"? '#eff0fc': "#303642",
                                                 textAlign: 'center',
-                                                color: '#5964E0',
                                                 padding: '15px 20px',
                                                 ml: '15px',
-                                                textTransform: 'none'
+                                                textTransform: 'none',
+                                                ":hover": {
+                                                    bgcolor: mode === "light-mode"? '#c4c8f4': "#535862",
+                                                }
                                             }}><span style={{
                                                 fontWeight: '700',
                                                 fontSize: '16px',
-                                                lineHeight: '20px',
+                                                    lineHeight: '20px',
+                                                    color: mode === "light-mode"? '#5964E0': "#ffffff",
                                             }}>Company Site</span></Button>
 
                                         </List>

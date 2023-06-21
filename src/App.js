@@ -8,7 +8,7 @@ import { Routes } from 'react-router-dom/dist';
 import CompanyHeader from './components/CompanyHeader';
 import CompanyCard from './components/CompanyCard';
 import CompanyFooter from './components/CompanyFooter';
-
+import { ThemeProvider, ThemeContext } from './components/ThemeToggler';
 function App() {
 
   return (
@@ -16,18 +16,24 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={
-            <Layout>
-              <SearchArea />
-              <MediaCard />
-            </Layout>}>
+            <ThemeProvider>
+              <Layout>
+                <SearchArea />
+                <MediaCard />
+              </Layout>
+            </ThemeProvider>
+          }>
 
           </Route>
           <Route exact path="/:id" element={
-            <Layout>
-              <CompanyHeader />
-              <CompanyCard />
-              <CompanyFooter />
-            </Layout>}>
+            <ThemeProvider>
+              <Layout>
+                <CompanyHeader />
+                <CompanyCard />
+                <CompanyFooter />
+              </Layout>
+            </ThemeProvider>
+          }>
 
           </Route>
         </Routes>
