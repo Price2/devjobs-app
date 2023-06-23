@@ -54,40 +54,32 @@ export default function MediaCard({ searchCriteria }) {
       setAllCards((prevCards) => [...prevCards, ...json.jobs_results]))
     }
     else if (searchCrit.location) {
-      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCriteria.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&location=' + searchCrit.location +"start="+nextPage).then((data) => data.json()).then((json) =>
+      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCrit.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&location=' + searchCrit.location +"start="+nextPage).then((data) => data.json()).then((json) =>
       setAllCards((prevCards) => [...prevCards, ...json.jobs_results]))
     }
     else {
-      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCriteria.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&chips=employment_type=fulltime&start='+nextPage).then((data) => data.json()).then((json) =>setAllCards((prevCards) => [...prevCards, ...json.jobs_results]))
+      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCrit.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&chips=employment_type=fulltime&start='+nextPage).then((data) => data.json()).then((json) =>setAllCards((prevCards) => [...prevCards, ...json.jobs_results]))
     }
 
   }
   const fetchBySearchCriteria = () => {
 
     if (searchCrit.search) {
-      fetch("https://serpapi.com/search.json?api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&engine=google_jobs&q=" + searchCrit.search + "&hl=en").then((data) => data.json()).then((json) =>
-        setAllCards(json.jobs_results))
+      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCriteria.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&location=' + searchCrit.location + `&chips=employment_type=${(searchCrit.full_time && searchCrit.full_time == true) ? "fulltime" : ""}`)
+      .then((data) => data.json())
+      .then((json) => setAllCards(json.jobs_results))
 
-    }
-    else if (searchCrit.location) {
-      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCriteria.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&location=' + searchCrit.location).then((data) => data.json()).then((json) =>
-        setAllCards(json.jobs_results))
-    }
-    else {
-      fetch('https://serpapi.com/search.json?engine=google_jobs&q=' + searchCriteria.search + '&hl=en&api_key=6cb091e8a72932b7a36f9993009468977230efd78dddb749976aaefaed6f4e9b&chips=employment_type=fulltime').then((data) => data.json()).then((json) =>
-        setAllCards(json.jobs_results))
     }
 
   }
-
   return (
     <>
       <Container>
         <Grid container sx={{ marginTop: "105px", flexGrow: 1 }} direction="row" spacing={2}>
 
-          {allCards.map((job, idx) => {
+          {allCards.length? allCards.map((job, idx) => {
             return (
-
+                
               <Grid key={idx} item md={4} sm={6} xs={12}>
                 <Link to={job.job_id.slice(0, 15)} state={{ job }} style={{ textDecoration: 'none' }}>
                   <Card sx={{
@@ -132,7 +124,7 @@ export default function MediaCard({ searchCriteria }) {
                 </Link>
               </Grid>
             )
-          })}
+          }): ""}
 
 
 

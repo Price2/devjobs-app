@@ -3,7 +3,7 @@ import { Container, Grid, List } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate  } from 'react-router-dom';
 import { ThemeContext } from './ThemeToggler';
 
 
@@ -12,21 +12,25 @@ const CompanyCard = () => {
     const [currentSelectedCard, setCurrentSelectedCard] = React.useState([])
     const location = useLocation();
     const toggler = React.useContext(ThemeContext)
+    const navigate = useNavigate();
+
     const mode = toggler.theme
 
 
     React.useEffect(() => {
-        if (!currentSelectedCard.length) {
+        if (!currentSelectedCard.length && location.state?.job) {
             setCurrentSelectedCard([location.state.job])
         }
+        else {
+            return navigate("/notfound")
+        }
     }, [location.state]);
-
 
     return (
 
 
         <Container sx={{ marginTop: '32px' }}>
-            {
+            {currentSelectedCard.length?
                 currentSelectedCard.map((cardDetails, idx) => {
 
                     return (
@@ -292,7 +296,7 @@ const CompanyCard = () => {
                     )
 
                 })
-            }
+            :""}
         </Container >
 
     );

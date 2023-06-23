@@ -17,7 +17,7 @@ const CompanyFooter = () => {
     const mode = toggler.theme
 
     React.useEffect(() => {
-        if (!currentSelectedCard.length) {
+        if (!currentSelectedCard.length && location.state?.job) {
             setCurrentSelectedCard([location.state.job])
         }
     }, [location.state]);

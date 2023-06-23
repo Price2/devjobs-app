@@ -3,12 +3,13 @@ import './App.css';
 import Layout from './components/Layout';
 import SearchArea from './components/SearchArea';
 import MediaCard from './components/Card';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import { Routes } from 'react-router-dom/dist';
 import CompanyHeader from './components/CompanyHeader';
 import CompanyCard from './components/CompanyCard';
 import CompanyFooter from './components/CompanyFooter';
 import { ThemeProvider, ThemeContext } from './components/ThemeToggler';
+import NotFound from './components/NotFound';
 
 function App() {
   const [input, setInput] = React.useState({})
@@ -21,6 +22,18 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+
+          
+ <Route
+          path="/notfound"
+          element={<ThemeProvider>
+            <Layout>
+             <NotFound/>
+            </Layout>
+          </ThemeProvider>}
+      />
+          
+
           <Route path="/" element={
             <ThemeProvider>
               <Layout>
@@ -42,6 +55,10 @@ function App() {
           }>
 
           </Route>
+
+          
+        
+
         </Routes>
       </BrowserRouter>
     </>

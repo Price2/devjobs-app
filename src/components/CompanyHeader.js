@@ -15,7 +15,7 @@ const CompanyHeader = () => {
     const mode = toggler.theme
 
     React.useEffect(() => {
-        if (!currentSelectedCard.length) {
+        if (!currentSelectedCard.length && location.state?.job) {
             setCurrentSelectedCard([location.state.job])
         }
     }, [location.state]);
@@ -32,9 +32,14 @@ const CompanyHeader = () => {
                             <Grid key={ idx} container sx={{ flexGrow: 1, justifyContent: 'center' }} direction="row" spacing={2}>
 
                                 <Grid item md={10}>
-                                    <Paper sx={{ display: 'flex', alignItems: 'center', width: '100%', border: 'none', boxShadow: 'none', backgroundColor: mode === "light-mode"? "#ffffff" : "#19202D" }}>
-                                        <List component="div" sx={{ display: 'flex', alignItems: 'flex', padding: '0' }} >
-                                            <img src={cardDetails.thumbnail? cardDetails.thumbnail: require('../images/company_pic.svg').default} />
+                                    <Paper sx={{ display: 'flex', justifyContent:"space-between" ,alignItems: 'center', width: '100%', border: 'none', boxShadow: 'none', backgroundColor: mode === "light-mode"? "#ffffff" : "#19202D" }}>
+                                        
+                                        <List component="div" sx={{ display: 'flex',  padding: '0', flex:"0.3" }} >
+                                            {cardDetails.thumbnail ?
+                                                <img src={cardDetails.thumbnail} style={{width:'100%'}} />
+                                                :
+                                                <img src={require("../images/no_logo.png")} />
+                                            }
                                         </List>
 
                                         <List component="div" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginLeft: '10px', flexGrow: 1 }}>

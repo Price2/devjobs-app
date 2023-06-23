@@ -11,7 +11,11 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
 const SearchArea = ({ filters }) => {
-    const [input, setInput] = React.useState({})
+    const [input, setInput] = React.useState({
+        search: "",
+        location: "",
+        full_time: false
+    })
     const toggler = React.useContext(ThemeContext)
     const mode = toggler.theme
 
